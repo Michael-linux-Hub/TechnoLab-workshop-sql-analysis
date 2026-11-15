@@ -59,8 +59,16 @@ LEFT JOIN attendance
 		ON attendance.school_id = schools.school_id
 GROUP BY district;
 
--- Q9. Calculate attendance percentage for every workshop and identify workshops below capacity.
+-- Q9 (a):  Attendance percentage for every workshop
+-- Calculate attendance percentage for every workshop and identify workshops below capacity.
 -- Your query:
+SELECT workshops.workshop_id, workshop_date, capacity, topic, (COALESCE(SUM(learners_attended), 0)* 100.0 / capacity) AS Attendence_Percentage
+FROM workshops
+LEFT JOIN attendance
+	ON attendance.workshop_id = workshops.workshop_id
+GROUP BY workshops.workshop_id;
+
+-- Q9 (b)
 SELECT workshops.workshop_id, workshop_date, capacity, topic, (COALESCE(SUM(learners_attended), 0)* 100.0 / capacity) AS Attendence_Percentage
 FROM workshops
 LEFT JOIN attendance
