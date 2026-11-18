@@ -25,7 +25,7 @@ FROM attendance
 JOIN schools
 	ON attendance.school_id = schools.school_id
 JOIN workshops
-	ON attendance.workshop_id = workshops.workshop_id
+	ON attendance.workshop_id = workshops.workshop_id;
 
 -- Q5. Calculate total learner attendances for each school that attended.
 -- Your query:
@@ -37,7 +37,7 @@ GROUP BY school_name;
 
 -- Q6. Calculate total learner attendances for every workshop, including workshops with none.
 -- Your query:
-SELECT workshops.workshop_id, workshop_date, topic, SUM(learners_attended) AS Total_Learners_Attendance
+SELECT workshops.workshop_id, workshop_date, topic, COALESCE(SUM(learners_attended), 0) AS Total_Learners_Attendance
 FROM workshops
 LEFT JOIN attendance
 	ON attendance.workshop_id = workshops.workshop_id
@@ -62,14 +62,14 @@ GROUP BY district;
 -- Q9 (a):  Attendance percentage for every workshop
 -- Calculate attendance percentage for every workshop and identify workshops below capacity.
 -- Your query:
-SELECT workshops.workshop_id, workshop_date, capacity, topic, (COALESCE(SUM(learners_attended), 0)* 100.0 / capacity) AS Attendence_Percentage
+SELECT workshops.workshop_id, workshop_date, capacity, topic, (COALESCE(SUM(learners_attended), 0)* 100.0 / capacity) AS Attendance_Percentage
 FROM workshops
 LEFT JOIN attendance
 	ON attendance.workshop_id = workshops.workshop_id
 GROUP BY workshops.workshop_id;
 
 -- Q9 (b)
-SELECT workshops.workshop_id, workshop_date, capacity, topic, (COALESCE(SUM(learners_attended), 0)* 100.0 / capacity) AS Attendence_Percentage
+SELECT workshops.workshop_id, workshop_date, capacity, topic, (COALESCE(SUM(learners_attended), 0)* 100.0 / capacity) AS Attendance_Percentage
 FROM workshops
 LEFT JOIN attendance
 	ON attendance.workshop_id = workshops.workshop_id
