@@ -23,6 +23,22 @@ SQLite SQL. `schools` links to `attendance` through `school_id`; `workshops` lin
 ## Rebuild
 In a fresh SQLite database, execute `schema.sql` once, then `sample_data.sql` once. Alternatively open `technolab.db` directly; do not rerun the setup scripts over it.
 
+## Power BI Report
+
+Interactive report showing learner attendances by school and district,
+workshop capacity utilisation, and a district slicer.
+
+![TechnoLab Power BI report](dashboard.png)
+
+[Download the Power BI file](TechnoLab_Workshop_Dashboard.pbix)
+
+The report uses the three CSV files in this repository.
+To refresh it on another computer, update their file paths through
+Transform data → Data source settings → Change Source.
+
+With no filters selected: 219 learner attendances and 75.5% overall
+capacity utilisation. All data is synthetic.
+
 ## Findings
 
 1. Synthetic School B recorded the highest participation,
